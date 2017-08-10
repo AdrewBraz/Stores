@@ -1,4 +1,11 @@
 extends  layout
 
+include mixins/_loginForm
+include mixins/_password
+
+
 block content
-  h1 #{title}
+  .inner
+    h1 #{title}
+    +loginForm()
+    +passwordForm()
