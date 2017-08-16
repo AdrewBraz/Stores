@@ -8,5 +8,5 @@ exports.addReview = async( req, res) => {
     await newReview.save();
 
     req.flash('success', 'Review saved!');
-    res.redirect('back')
+    res.redirect('back');
 }

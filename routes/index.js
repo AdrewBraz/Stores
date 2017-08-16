@@ -26,6 +26,8 @@ router.post('/add/:id',
 
 
 router.get('/stores', catchErrors(storeController.getStores));
+router.get('/stores/page/:page', catchErrors(storeController.getStores));
+
 
 router.get(`/stores/:id/edit`, catchErrors(storeController.editStore));
 router.get('/store/:slug', catchErrors(storeController.getStoreBySlug))
@@ -57,13 +59,6 @@ router.post('/account/reset/:token',
   catchErrors(authController.update)
 );
 
-router.get('/map', storeController.mapPage)
-
-router.get('/api/search', catchErrors(storeController.searchStores));
-
-router.get('/api/stores/near', catchErrors(storeController.mapStores))
-router.post('/api/stores/:id/heart', catchErrors(storeController.heartStore))
-
 router.get('/hearts',
   authController.isLoggedIn,
   catchErrors(storeController.getHearts));
@@ -72,5 +67,15 @@ router.post('/reviews/:id',
   authController.isLoggedIn,
   reviewController.addReview
 )
+
+router.get('/map', storeController.mapPage)
+
+router.get('/top', catchErrors(storeController.getTopStores));
+
+router.get('/api/search', catchErrors(storeController.searchStores));
+
+router.get('/api/stores/near', catchErrors(storeController.mapStores))
+router.post('/api/stores/:id/heart', catchErrors(storeController.heartStore))
+
 
 module.exports = router;

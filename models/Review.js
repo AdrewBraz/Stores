@@ -28,4 +28,12 @@ const reviewShema = new mongoose.Schema({
 
 })
 
+function autoPopulate(next){
+  this.populate('author');
+  next();
+}
+
+reviewShema.pre('find', autoPopulate);
+reviewShema.pre('findOne', autoPopulate);
+
 module.exports = mongoose.model('Review', reviewShema);
