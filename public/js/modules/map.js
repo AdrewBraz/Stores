@@ -47,7 +47,6 @@ function loadPlaces(map, lat = 55.7, lng = 37.6){
 export default function makeMap(mapContainer){
   if(!mapContainer) return;
   const map = new google.maps.Map(mapContainer, mapOptions)
-  console.log(map)
   loadPlaces(map)
 
   const input = document.querySelector('[name="geolocate"]');

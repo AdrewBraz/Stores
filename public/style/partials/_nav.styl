@@ -1,49 +1,71 @@
 .nav 
   display flex
+  flex-direction column
+  justify-content space-between
+  align-items center
+  flex-wrap wrap
   list-style none
   margin 0
   padding 0
-  justify-content space-between
   background $black
-  &__section 
+
+  @media all and (min-width 650px) 
     display flex
+    flex-direction row 
+  
+  &__section
+    width 100%
+
+  &__section-pages
+    display flex
+    flex-direction row
+    flex-wrap wrap
     &--search 
       flex 1 1 auto
-    
+
+  &__section-user
+    border-top 1px solid rgba(255,255,255,0.1)  
+
+  &__section--search
+    order 2
+    border-top 1px solid rgba(255,255,255,0.1)  
   
   &__item 
     display flex
+
+  &__user-item
+    width 100%
+
+    &-logo
+      width 100%
+      border-bottom 1px solid rgba(255,255,255,0.1)
   
   &__link 
     background $black
     color white
     border-right 1px solid rgba(255,255,255,0.1)
     text-transform uppercase
-    padding 1.2rem 2rem 1rem 2rem
+    padding 1.2rem 1rem 1rem 1rem
     display block
     display flex
     flex-direction column
     align-items center
-    justify-content center
+    justify-content flex-end
     transition transform 0.2s
     border-bottom 5px solid transparent
     svg 
-      width 40px
       transition all 0.2s
       fill white
       margin-bottom 1rem
     
-    &hover, &--active 
+    &:hover, &--active 
       border-bottom-color rgba(0,0,0,0.2)
       border-right-color rgba(0,0,0,0.05)
-      svg 
-        transform scale(1.2)
-      
       background linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%) fixed
-      // background none
-    
-    &--logo 
-      &hover 
+      svg 
+        transform scale(1.1)
+
+      &:hover 
         svg 
           transform none
         
@@ -57,43 +79,22 @@
 
 
 
-@media all and (max-width 1200px) 
-  .nav 
-    &__link 
-      padding-left 1rem
-      padding-right 1rem
-      svg 
-        width 30px
+// @media all and (max-width 1200px) 
+//   .nav 
+//     &__link 
+//       svg 
+//         width 30px
       
-      &--logo 
-        svg 
-          width 100px
+//       &--logo 
+//         svg 
+//           width 100px
         
-      
-    
-  
-
-
-@media all and (max-width 900px) 
-  .nav 
-    flex-wrapwrap
-    &__section 
-      order 1
-      &--search 
-        border-top 1px solid rgba(255,255,255,0.1)
-        order 2
-        width 100%
-      
-    
-  
-
-
 @media all and (max-width 650px) 
   .nav 
     &__section 
       width 100%
-      &--user 
-        order -1
+      &-user
+        display flex 
         border-bottom 1px solid rgba(255,255,255,0.1)
         .avatar 
           min-width 20px
@@ -101,11 +102,9 @@
         
         svg 
           display none
-        
       
-    
-    &__item 
-      width 33.333333%
+    &__item
+      width 20%
     
     &__link 
       width 100%
@@ -113,7 +112,9 @@
         // width 5px
         max-width 100%
       
-      &--logo 
+      &--logo
+        width 95%
+        border-right none 
         svg 
           width 100%
         
@@ -124,4 +125,23 @@
     content '♥️'
     margin-right 1rem
   
+@media all and (min-width 650px) 
+  .nav
+    &__section-pages
+      justify-content space-between
+      width 70%
 
+    &__section-user
+      display flex
+      justify-content space-between
+      width 30%
+
+    &__item-logo
+      width 20%
+      border-bottom none
+
+    &__section-user
+      border-bottom none
+
+    &__link
+      height 10rem
