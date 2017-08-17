@@ -2,16 +2,17 @@ import axios from 'axios';
 
 const mapOptions = {
   center: {
-    lat: 43.2, 
-    lng: -79.8
+    lat: 55.7, 
+    lng: 37.6
   },
   zoom: 10
 }
 
-function loadPlaces(map, lat = 43.2, lng = -79.8){
+function loadPlaces(map, lat = 55.7, lng = 37.6){
   axios.get(`api/stores/near?lat=${lat}&lng=${lng}`)
        .then( res => {
          const places = res.data;
+         console.log(places)
          if(!places) return;
 
          const bounds = new google.maps.LatLngBounds();
@@ -21,6 +22,7 @@ function loadPlaces(map, lat = 43.2, lng = -79.8){
            const [ placeLng, placeLat ] = place.location.coordinates;
            const position = { lat: placeLat, lng: placeLng };
            bounds.extend(position);
+           console.log(position)
            const marker = new google.maps.Marker({ map, position });
            marker.place = place;
            return marker;
@@ -45,6 +47,7 @@ function loadPlaces(map, lat = 43.2, lng = -79.8){
 export default function makeMap(mapContainer){
   if(!mapContainer) return;
   const map = new google.maps.Map(mapContainer, mapOptions)
+  console.log(map)
   loadPlaces(map)
 
   const input = document.querySelector('[name="geolocate"]');

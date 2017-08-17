@@ -56,7 +56,7 @@ exports.createStore = async (req, res) => {
 
 exports.getStores = async (req, res) => {
   const page = req.params.page || 1;
-  const limit = 8;
+  const limit = 6;
   const skip = ( page * limit ) - limit; 
   const storesPromise = Store
   .find()
@@ -127,6 +127,7 @@ exports.searchStores = async (req, res) => {
 
 exports.mapStores = async (req, res) => {
   const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+  console.log(coordinates)
   const q = {
     location: {
       $near: {
@@ -140,6 +141,7 @@ exports.mapStores = async (req, res) => {
   }
 
   const stores = await Store.find(q).select('slug name description location photo').limit(10);
+  console.log(stores)
   res.json(stores)
 }
 
