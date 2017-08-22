@@ -74,10 +74,7 @@ storeSchema.statics.getTopStores = function() {
   return this.aggregate([
     { $lookup: { from: 'reviews', localField: '_id', foreignField: 'store', as: 'reviews' }},
     { $match: { 'reviews.1': { $exists: true }}},
-    { $project: {
-       photo: '$$ROOT.photo',
-       name: '$$ROOT.name',
-       reviews: '$$ROOT.reviews',
+    { $addField: {
        averageRating: { $avg: '$reviews.rating'}
       }
     },
