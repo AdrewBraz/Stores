@@ -3,15 +3,15 @@ const pug = require('pug');
 const juice = require('juice');
 const htmlToText = require('html-to-text');
 const promisify = require('es6-promisify');
+const sg = require('nodemailer-sendgrid-transport');
 
-const transport = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
+var options = {
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS
+      api_key: process.env.MAIL_KEY
   }
-});
+}
+
+const transport = nodemailer.createTransport( sg(options) );
 
 const generateHTML = (filename, options = {}) => {
   const html = pug.renderFile(`${__dirname}/../views/email/password-reset.pug`, options);
@@ -23,7 +23,7 @@ exports.send = async (options) => {
   const html = generateHTML(options.filename, options);
   const text = htmlToText.fromString(html);
   const mailOptions = {
-    from: `anbrazhnikov@gmail.com`,
+    from: `node-app@example.com`,
     to: options.user.email,
     subject: options.subject,
     html,
