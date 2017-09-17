@@ -1,12 +1,12 @@
 🚀🚀🚀
 
-# An app with some cool features like:
+# features:
 * authorization
 * reviewing
 * adding your own favorite places
 * forming your top list
 
-## This app is build with:
+## build with:
 * Webpack
 * Express
 * MongoDB
